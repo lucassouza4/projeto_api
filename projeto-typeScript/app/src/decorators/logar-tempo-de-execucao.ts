@@ -1,4 +1,4 @@
-export function LogarTempoDeExecucao(){
+export function LogarTempoDeExecucao(emSegundos: boolean = false){
     return function(
         target: any,
         propertyKey: string,
@@ -9,8 +9,11 @@ export function LogarTempoDeExecucao(){
             const t1 = performance.now();
             const retorno = metodoOriginal.apply(this,args);
             const t2 = performance.now();
+            if(!emSegundos)
+                console.log(`Tempo de execução de '${propertyKey}' em milisegundos: ${t2-t1}`);
+            else
             console.log(`Tempo de execução de '${propertyKey}' em segundos: ${(t2-t1)/1000}`);
-            retorno;
+            return retorno;
         }
         return descriptor;
     }
