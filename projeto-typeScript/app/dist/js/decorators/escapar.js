@@ -3,10 +3,10 @@ export function Escapar(target, propertyKey, descriptor) {
     descriptor.value = function (...args) {
         let retorno = metodoOriginal.apply(this, args);
         if (typeof retorno === 'string') {
-            console.log(`Escape sendo executado na classe '${this.constructor.name}' método '${propertyKey}'`);
             retorno = retorno.replace(/<script>[\s\S]*?<\/script>/, '');
         }
         return retorno;
     };
     return descriptor;
 }
+//# sourceMappingURL=escapar.js.map
